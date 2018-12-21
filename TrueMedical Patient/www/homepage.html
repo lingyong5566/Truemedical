@@ -1,0 +1,120 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!--
+        Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
+        For details, see http://go.microsoft.com/fwlink/?LinkID=617521
+    -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://mp13.projectsbit.org https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *">
+
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css" />
+
+    <script src="lib/jquery-1.11.2.min.js"></script>
+    <script src="lib/jquery.mobile-1.4.5.min.js"></script>
+    <script src="scripts/common.js"></script>
+    <script src="lib/jquery.validate.min.js"></script>
+    <script src="lib/angular.min.js"></script>
+
+    <title>TrueMedical Patient</title>
+</head>
+<body>
+    <div data-role="panel" class="ui-panel-position-left ui-panel-inner" id="mypanel" data-display="overlay">
+        <div class="panel-header" data-position="fixed">NAVIGATE</div>
+        <div class="close-button">
+            <a href="#mypanel" class="ui-btn ui-corner-all ui-btn-right ui-btn-icon-notext ui-icon-delete ui-nodisc-icon ui-alt-icon" data-role="button" data-rel="close">Close Me</a>
+        </div>
+
+        <ul data-role="none" data-inset="false" class="ui-listview">
+            <li><a href="#" id="btnHome">HOME</a></li>
+            <li><a href="#" id="btnYourInfo" onclick="window.location.reload()">PROFILE</a></li>
+            <li><a href="#" id="btnAppt">APPOINTMENTS</a></li>
+            <li><a href="#" id="btnHistory">HISTORY</a></li>
+            <li><a href="#">ABOUT US</a></li>
+            <li><a href="#">FAQ</a></li>
+
+            <li><div class="divider"></div></li>
+
+            <li><a href="#">SETTINGS</a></li>
+            <li><a href="#" id="btnLogout">LOG OUT</a></li>
+        </ul>
+
+        <div class="ui-page-footer-fixed">
+            <h3>MP13 | Copyright 2018 Temasek Polytechnic</h3>
+        </div>
+    </div>
+
+    <div data-role="header" class="ui-header" data-position="fixed" id="header">
+        <div class="menu-button">
+            <a href="#mypanel" class="ui-btn ui-corner-all ui-btn-left ui-btn-icon-notext ui-icon-bars ui-nodisc-icon ui-alt-icon ui-noboxshadow" data-role="button" data-rel="open">Menu</a>
+            <h3 style="text-align: center; letter-spacing: 0.5px;">HOME</h3>
+            <div class="divider"></div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="homepage">
+            <div class="columns">
+                <a href="#" id="btnCheckIn">
+                    <div class="item">
+                        <img src="data:image/png;base64,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">
+                        <p>CHECK IN</p>
+                    </div>
+                </a>
+
+                <a href="#" id="btnEnquire">
+                    <div class="item">
+                        <img src="data:image/png;base64,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">
+                        <p>ENQUIRIES</p>
+                    </div>
+                </a>
+
+                <a href="#" id="btnContact">
+                    <div class="item">
+                        <img src="data:image/png;base64,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">
+                        <p>CONTACT</p>
+                    </div>
+                </a>
+
+                <a href="#" id="btnBMI">
+                    <div class="item">
+                        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEsAAABLCAYAAAA4TnrqAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAQySURBVHhe7ZzdSxRRGMYN6i8I6j76D/oDgqK1LrrPKKiuuiki6CooCnS3wkgvzLQsS1O0Ij8SAzHT3FExLXU1dfH7A7WkRQqFdk7nGWdg5pxROrG7M4PvAw+74z7sed8f65yZs3qySJkSY7uO5Gr7j4Z7DvjdqBP1mpVnTsfude7LjmiF2ZHod/7IguJQOLrCHwuP5nXvNVtJr0J50YOhsDaHwU/m97BLlXF27dWU7406Ua8JbRZ9mC2lR4ce9e7hg41gwBsNC6xhTGdN8eC4YVxnN+rnN4FForHDNz/sNltLvY6HtTMY6Er1BGviA7sV5Hvzui9XTRjA0I/ZWurFP77PMUjV4IZ7IQEx6kcf3OVma6lXdjjaikHqRpOuRQTFqN+AxfsxW0u9+CerA4PUBxwW6kcf6MdsLfXaDlbbtM5mEsx3Rl1irZ7D0uZ05kehLrFWgrWFCJaCCJaCCJaCdiyss0V9RpPQUmLdeH61Ysg4bo2tGMdlbdPGsaUdCwtgzhX3Gc+/r20Yz3PfjhnH2viqcVzbNW8cW9qxsP5HBEtBBEtBvoRFtzuCtoMVJBMsBRMsBRMsBRMsBWcUVnHPOnv2VQ+sUX/GYN3/9JsV9yYDa9RPsP7RBEvBBEvBnsMq7Uuyl4Oyn/Cf23MVA3LmxVdnpqxfzsAln505u0v5a8/5+4guEcaHPYf19lvSvHV1qmWCzz623NqG+YJNi2vMkena4qYcoO05u+tGdTb5U3b1kJwlWATLKYLFRbBMESwXWJW8kf5FXXLtsDMHEGKmfdoJtJ43LmZgzJL2nN2VfLZsnZRd/kXOeg4rSCZYCiZYCvYcVk0syeYSuuQGfv6x58Z/yJmBJWcGk4KYgd3OP5ZrYzr7vJCU7DYpeA6LZkNBBEtBBEtBBEtB28F6zS8+E+tMcnPcCQtgxEx81ZnBRaqYgcWlHLvfjOgstiIbSzti1nNYQTLBUjDBUrDnsLCE+3FKl1wlnDNwwhcz4nkNN99iBhaXqO3G+I1juuSnfryRptlQEMFSEMFSEMFSEMFS0HawsOSL/5kWjVnKngNUMYOrf3sGS9RiBsYXufac3Zj1aoZ1yY/9+CVrkEywFEywFOw5LK9P8Ncblw0AonNbfkpZgkWwnCJYXATLFMFygYWlmOEVXfKbEWcOf7MgZrRZJ9B3/AJUzMBuyy2Ww60JdrEiLjm//ZeU9RxWkJwRWNZeNPkdwYaF+tFHWvei4QOUY5Db71ddiwiKbzWvbsJK5y5H1v5Zpx8OsYe9f1wL8btRd07x0CasvM4cs7XUCzuZ8Y/uMAa6UPaNFUTXXQvyq1HveV436g+FtYG07swGYa+87LA2gwFP3O3STxUNsrMlMd8bdZ64022Bmkr7nn+WsBsjn0kKuLE7o/X773uHItpyKBJ9kLHdJEUFap9SUqaUlfUXsKnU3ayrJx8AAAAASUVORK5CYII=">
+                        <p>BMI</p>
+                    </div>
+                </a>
+            </div>
+            <div class="divider"></div>
+            <h3 align="center"><b>Queue Status</b></h3>
+            <div ng-app="myApp" ng-controller="patientCtrl">
+                <div class="queue-status">
+                    <label>
+                        Current Number of People in Queue: {{ queueNumber }}
+                    </label>
+
+                    <label>
+                        Number of Patients Before You: {{ estNumber }}
+                    </label>
+                </div>
+                 
+                <!--<div>                        
+                    <input type="button" ng-click="btnRegisterQueue()" value="Register">
+                </div>-->
+
+                <div class="signin-button">
+                    <button class="ui-btn ui-corner-all" ng-click="btnRegisterQueue()" style="letter-spacing: 2px;">REGISTER</button>
+                </div>
+            </div>
+            </div>
+        </div>
+
+    <!--<footer data-role="footer" data-position="fixed" id="footer"></footer>-->
+
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+    <script src="scripts/homepage.js"></script>
+</body>
+</html>

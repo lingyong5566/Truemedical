@@ -1,0 +1,142 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!--
+        Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
+        For details, see http://go.microsoft.com/fwlink/?LinkID=617521
+    -->
+
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css" />
+
+    <script src="lib/jquery-1.11.2.min.js"></script>
+    <script src="lib/jquery.mobile-1.4.5.min.js"></script>
+    <script src="scripts/common.js"></script>
+    <script src="lib/jquery.validate.min.js"></script>
+    <script src="lib/angular.min.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+    <script type="text/javascript" src="scripts/getpatient.js"></script>
+    <title>Get Patient</title>
+</head>
+<body>
+    <div ng-app="myApp" ng-controller="getPatientCtrl">
+        <div data-role="panel" class="ui-panel-position-left ui-panel-inner" id="mypanel" data-display="overlay">
+            <div class="panel-header" data-position="fixed">NAVIGATE</div>
+            <div class="close-button">
+                <a href="#mypanel" class="ui-btn ui-corner-all ui-btn-right ui-btn-icon-notext ui-icon-delete ui-nodisc-icon ui-alt-icon" data-role="button" data-rel="close">Close Me</a>
+            </div>
+
+            <ul data-role="none" data-inset="false" class="ui-listview">
+                <li><a href="#" id="btnHome">HOME</a></li>
+                <li><a href="#" id="btnYourInfo" onclick="window.location.reload()">PROFILE</a></li>
+                <li><a href="#" id="btnAppt">APPOINTMENTS</a></li>
+                <li><a href="#" id="btnHistory">HISTORY</a></li>
+                <li><a href="#">ABOUT US</a></li>
+                <li><a href="#">FAQ</a></li>
+
+                <li><div class="divider"></div></li>
+
+                <li><a href="#">SETTINGS</a></li>
+                <li><a href="#" id="btnLogout">LOG OUT</a></li>
+            </ul>
+
+            <div class="ui-page-footer-fixed">
+                <h3>MP13 | Copyright 2018 Temasek Polytechnic</h3>
+            </div>
+        </div>
+
+        <div data-role="header" class="ui-header" data-position="fixed" id="header">
+            <div class="menu-button">
+                <a href="#mypanel" class="ui-btn ui-corner-all ui-btn-left ui-btn-icon-notext ui-icon-bars ui-nodisc-icon ui-alt-icon ui-noboxshadow" data-role="button" data-rel="open">Menu</a>
+                <h3 style="text-align: center; letter-spacing: 0.5px;">RETRIEVE PATIENT DETAILS</h3>
+                <div class="divider"></div>
+            </div>
+        </div>
+
+        <div class="main-content">
+            <div class="getpatient">
+                <div>
+                    <div>
+                        <label>NRIC Number</label>
+                        <input type="text" name="nric" id="nric" data-ng-model="obj.nric" placeholder="Search S9812345J">
+                        <button class="ui-btn ui-btn-a ui-corner-all" ng-click="btnGetPatient()" id="btnEnquire">GO</button>
+                    </div>
+
+                    <table>
+                        <tr>
+                            <td>
+                                <label>Name on NRIC:</label>
+                            </td>
+                            <td>
+                                <label>{{ obj2.name }}</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Mobile Number:</label>
+                            </td>
+                            <td>
+                                <label>{{ obj2.mobileNo }}</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Home Address:</label>
+                            </td>
+                            <td>
+                                <label>{{ obj2.homeAdd }}</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Marital Status:</label>
+                            </td>
+                            <td>
+                                <label>{{ obj2.marital }}</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Sex:</label>
+                            </td>
+                            <td>
+                                <label>{{ obj2.sex }}</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Nationality:</label>
+                            </td>
+                            <td>
+                                <label>{{ obj2.nationality }}</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Food Allergy:</label>
+                            </td>
+                            <td>
+                                <label>{{ obj2.food_allergies_select }}</label>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label>Drug Allergy:</label>
+                            </td>
+                            <td>
+                                <label>{{ obj2.allergies_select }}</label>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
