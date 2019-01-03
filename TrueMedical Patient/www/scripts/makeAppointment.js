@@ -8,8 +8,8 @@ app.controller('apptCtrl', function ($scope, $http) {
     //Variables
     var date;
     var time;
-    var email;
-    var name;
+    var email = localStorage.getItem("email");
+    var name = localStorage.getItem("userid");
     $(document).ready(function () {
 
 
@@ -124,7 +124,9 @@ app.controller('apptCtrl', function ($scope, $http) {
             "date": date,
             "time": time,
             "doctor": $scope.doctor,
-            "details": $scope.details
+            "details": $scope.details,
+            "name": name,
+            "email": email
         };
         console.log(JSONObject);
         $.ajax({
