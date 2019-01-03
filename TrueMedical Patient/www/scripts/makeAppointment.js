@@ -58,6 +58,49 @@ app.controller('apptCtrl', function ($scope, $http) {
 
     });
 
+    console.log("Init()");
+    var url = serverURL() + "/adminblacklist.php";
+
+    $.ajax({
+        url: url,
+        type: 'GET',
+        data: '',
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        success: function (arr) {
+            console.log(arr);
+            $scope.blacklisted = arr;
+            modRes();
+        },
+        error: function () {
+            return;
+        }
+    });
+
+    var modRes = function () {
+        
+        if (filterStyle(name, $scope.blacklisted).length > 0) {
+            alert("YOU ARE BLACKLISTED");
+            window.location = "homepage.html";
+        }
+        else {
+        }
+        /*if (!$scope.blacklisted.indexOf($scope.userss[x].userid)) {
+            $scope.userss[x].modStatus = "Blacklisted";
+        }
+        else {
+            $scope.userss[x].modStatus = "Not blacklisted";
+        }*/
+        $scope.$apply();
+    }
+
+    var filterStyle = function (styleSelected, data) {
+        var wantedData = data.filter(function (i) {
+            return i.userid == styleSelected;
+        });
+        return wantedData;
+    }
+
     
     
     var checkDate = function (date) {

@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>True Medical Clinic</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts/jquery-1.11.2.min.js"></script>
+    <script src="scripts/jquery.validate.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script type="text/javascript" src="scripts/index.js"></script>
+    <script type="text/javascript" src="scripts/common.js"></script>
+    <script type="text/javascript" src="scripts/adminblacklist.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Source Sans Pro' rel='stylesheet'>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+    <style>
+
+        /* top navigation bar styles */
+        ul {
+            list-style-type: none;
+            margin: 0px -10px;
+            padding: 0;
+            overflow: hidden;
+            background-color: #17A5AC;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1;
+        }
+
+        li {
+            float: left;
+        }
+
+            li a {
+                display: block;
+                color: black;
+                text-align: center;
+                padding: -15px -10px;
+                text-decoration: none;
+            }
+
+                li a:hover {
+                    background-color: #D4F2F4;
+                }
+
+        .active1 {
+            background-color: #D4F2F4;
+        }
+
+        body {
+            font-family: 'Source Sans Pro';
+            background-color: #F2FDFF;
+        }
+
+
+        #queuestatus td, #queuestatus th {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+
+        #queuestatus tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #queuestatus tr:hover {
+            background-color: #ddd;
+        }
+
+        #queuestatus th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            background-color: #00999e;
+            color: white;
+        }
+
+        #queuestatus tr td:last-child {
+            border: none;
+        }
+
+        button#btnEdit {
+            color: #fff;
+            background-color: #008E94;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 18px;
+            font-weight: bold;
+            text-transform: uppercase;
+            padding: 8px;
+            font-family: 'Source Sans Pro';
+            width: 40%;
+            border-radius: 10px;
+            transition: all 0.3s;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+        }
+
+        .disButton {
+            border: 1px solid #999999;
+            background-color: #57606f !important;
+            color: #666666;
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .disabled {
+            border: 1px solid #999999;
+            background-color: #57606f !important;
+            color: #666666;
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* footer styles */
+        footer {
+            text-align: center;
+        }
+
+        .fa {
+            margin: 20px 2px;
+            border-radius: 50%;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- top navigation bar -->
+    <ul>
+        <li><a onclick="homePage()" style="padding-right: 8px; padding-left: 8px;"><i class='fa fa-home'></i>Home</a></li>
+        <li><a onclick="patientDetails()" style="padding-right:8px; padding-left: 8px;"><i class="fa fa-id-card"></i>Patient Details</a></li>
+        <li><a onclick="viewAppointments()" style="padding-right:8px; padding-left: 8px;"><i class="fa fa-calendar-alt"></i>Scheduled Appointments</a></li>
+        <li><a class="active1" onclick="viewQueue()" style="padding-right:8px; padding-left: 8px;"><i class="fa fa-spinner fa-pulse"></i>Queue Status</a></li>
+        <li><a onclick="viewFeedback()" style="padding-right:8px; padding-left: 8px;"><i class="fa fa-comments"></i>Application Enquiries</a></li>
+        <li><a onclick="clinicStatistics()" style="padding-right:8px; padding-left: 8px;"><i class="fa fa-chart-line"></i>Clinic Statistics</a></li>
+    </ul>
+
+    <h2 style="padding-top:40px;">Clinic Queue Status</h2>
+
+    <div ng-app="myApp" ng-controller="patientCtrl" ng-init="init()">
+        <table id=queuestatus width=80% align="center" style="border-collapse: collapse;">
+            <tr>
+                <th width="30%">
+                    <b>User ID</b>
+                </th>
+                <th colspan="2">
+                    <b>Status</b>
+                </th>
+            </tr>
+
+            <tr ng-repeat="x in modResults">
+                <td>{{ x.userid }}</td>
+                <td>{{ x.modStatus }}</td>
+                <td>
+                    <button type="button" ng-click="updateValue(x)" ng-disabled="x.modStatus=='Checked In'" value="Edit" id="btnEdit" ng-class="{'disButton': (x.modStatus=='Checked In')}">Blacklist</button>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                    <button type="button" ng-click="deleteValue(x)" value="Edit" id="btnEdit">Remove from Blacklist</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <script>
+        /* top navigation bar js */
+        function homePage() {
+            location.replace("http://mp13.projectsbit.org/truemedical/homepage.html")
+        }
+        function patientDetails() {
+            location.replace("http://mp13.projectsbit.org/truemedical/patientInfo.html")
+        }
+        function viewAppointments() {
+            location.replace("http://mp13.projectsbit.org/truemedical/adminappointment.html")
+        }
+        function viewQueue() {
+            location.replace("http://mp13.projectsbit.org/truemedical/adminqueue.html")
+        }
+        function viewFeedback() {
+            location.replace("http://mp13.projectsbit.org/truemedical/adminenquire.html")
+        }
+        function clinicStatistics() {
+            location.replace("http://mp13.projectsbit.org/truemedical/clinicstatistics.html")
+        }
+    </script>
+    <br>
+    <footer>
+        <!-- Add font awesome icons -->
+        <i class='fab fa-css3-alt' style='font-size:24px'></i>
+        <i class='fab fa-html5' style='font-size:24px'></i>
+        <i class='fab fa-js-square' style='font-size:24px'></i>
+        <i class='fab fa-angular' style='font-size:24px'></i>
+        <i class='fab fa-php' style='font-size:24px'></i>
+        <i class='fab fa-cpanel' style='font-size:24px'></i>
+        <i class="fab fa-android" style="font-size:24px"></i>
+        <i class="fab fa-google-plus" style="font-size:24px"></i>
+    </footer>
+</body>
+</html>
