@@ -53,6 +53,10 @@ function printnavbar() {
     $("#btnBMI").bind("click", function () {
         window.location = "bmicalculator.html";
     });
+
+    $("#btnChat").bind("click", function () {
+        window.location = "chat.html";
+    });
 }
 
 

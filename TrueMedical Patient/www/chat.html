@@ -1,0 +1,63 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <!--
+        Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
+        For details, see http://go.microsoft.com/fwlink/?LinkID=617521
+    -->
+
+    <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <meta name="format-detection" content="telephone=no">
+    <meta name="msapplication-tap-highlight" content="no">
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.css" />
+
+    <script src="lib/jquery-1.11.2.min.js"></script>
+    <script src="lib/jquery.mobile-1.4.5.min.js"></script>
+    <script src="https://code.highcharts.com/highcharts.js"></script>
+    <script src="https://code.highcharts.com/highcharts-more.js"></script>
+    <script src="https://code.highcharts.com/modules/solid-gauge.js"></script>
+    <script src="scripts/common.js"></script>
+    <script src="lib/jquery.validate.min.js"></script>
+    <script src="lib/angular.min.js"></script>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="scripts/platformOverrides.js"></script>
+    <script type="text/javascript" src="scripts/chat.js"></script>
+    <script type="text/javascript" src="scripts/common.js"></script>
+    <title>Quick Enquire</title>
+</head>
+<body>
+    <div ng-app="myApp" ng-controller="patientCtrl" data-role="page" id="front-page" ng-init="init()">
+        <table height="640px" width="100%">
+            <thead>
+                <td height="520px">
+                    <table>
+                        <tr ng-repeat="x in messages">
+                            <td>{{x.fromWho}} : {{ x.details }}</td>
+                        </tr>
+                    </table>
+                </td>
+            </thead>
+                <tr ng-show="oUser">
+                    <td>
+                        <input type="text" id="chatBox" data-ng-model="toWho" placeholder="Send to?">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="text" id="chatBox" data-ng-model="details" placeholder="Chat here">
+                    </td>
+                    <td>
+                        <button type="button" ng-click="sendChat()" >Send</button>
+                    </td>
+                </tr>
+        </table>
+        <div>
+
+        </div>
+
+    </div>
+</body>
+</html>
