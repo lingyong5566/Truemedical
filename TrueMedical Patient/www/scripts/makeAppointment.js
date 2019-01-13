@@ -10,6 +10,7 @@ app.controller('apptCtrl', function ($scope, $http) {
     var time;
     var email = localStorage.getItem("email");
     var name = localStorage.getItem("userid");
+    var bookingStatus = 1;
     $(document).ready(function () {
 
 
@@ -169,7 +170,8 @@ app.controller('apptCtrl', function ($scope, $http) {
             "doctor": $scope.doctor,
             "details": $scope.details,
             "name": name,
-            "email": email
+            "email": email,
+            "bookingStatus": 0
         };
         console.log(JSONObject);
         $.ajax({

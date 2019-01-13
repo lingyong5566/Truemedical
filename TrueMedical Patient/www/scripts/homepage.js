@@ -37,6 +37,37 @@ app.controller('patientCtrl', function ($scope, $http) {
                 }
             });
 
+            var url = serverURL() + "/getAppointment.php";
+
+            $.ajax({
+                url: url,
+                type: 'GET',
+                data: '',
+                dataType: 'json',
+                contentType: "application/json; charset=utf-8",
+                success: function (arr) {
+                    for (var x in arr) {
+                        console.log(arr[x])
+                        console.log(arr[x].name)
+                        console.log(userid)
+                        if (arr[x].name == userid) {
+                            if (arr[x].bookingStatus == 1) {
+                                $scope.confirmedBooking = "Confirmed"
+                            }
+                            else {
+                                $scope.confirmedBooking = "Not Confirmed";
+                            }
+                            
+                        }
+                    }
+
+                    $scope.$apply();
+                },
+                error: function () {
+                    return;
+                }
+            });
+
             $scope.estNumber = filterResults(results, userid, "userid");
             $scope.$apply();
         }, interval);
@@ -59,9 +90,17 @@ app.controller('patientCtrl', function ($scope, $http) {
             alert("You are a current registered patient with True Medical Clinic.");
         }
         else {
+            var currentdate = new Date();
+            var datetime = currentdate.getFullYear() + "-"
+                + (currentdate.getMonth() + 1) + "-"
+                + currentdate.getDate() + " "
+                + currentdate.getHours() + ":"
+                + currentdate.getMinutes() + ":"
+                + currentdate.getSeconds();
             var data = {
                 "userid": localStorage.getItem('userid'),
-                "status": 1
+                "status": 1,
+                "datetime": datetime
             };
 
             var url = serverURL() + "/generalupdate.php";

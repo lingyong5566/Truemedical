@@ -22,6 +22,12 @@ app.controller('patientCtrl', function ($scope, $http) {
     
 
     $scope.init = function () {
+        req();
+    }
+
+    var interval = 1000;
+
+    var req = function () {
         var data = {
             "userid": userid
         };
@@ -60,6 +66,8 @@ app.controller('patientCtrl', function ($scope, $http) {
                         console.log("Order : ", $scope.messages);
                         $scope.$apply();
 
+                        setTimeout(req, interval);
+
                     },
                     error: function (err) {
                         console.log(err);
@@ -72,65 +80,15 @@ app.controller('patientCtrl', function ($scope, $http) {
                 return;
             }
         });
-
-        
     }
 
-    var interval = 1000;
-    setInterval(
-        function () {
-            var data = {
-                "userid": userid
-            };
+    function httpGet(theUrl,data) {
+        var xmlHttp = new XMLHttpRequest();
+        xmlHttp.open("GET", theUrl + "?fromWho=" + data.fromWho + "&details=" + data.details + "&toWho=" + data.toWho, false); // false for synchronous request
+        xmlHttp.send(null);
+        return xmlHttp.responseText;
+    }
 
-            var url = serverURL() + "/chatGet.php";
-
-
-            $.ajax({
-                url: url,
-                type: 'GET',
-                data: data,
-                dataType: 'json',
-                contentType: "application/json; charset=utf-8",
-                success: function (arr) {
-                    $scope.messages = arr;
-                    console.log("Messages received : ", arr);
-
-                    var url2 = serverURL() + "/chatGetOwn.php";
-
-
-                    $.ajax({
-                        url: url2,
-                        type: 'GET',
-                        data: data,
-                        dataType: 'json',
-                        contentType: "application/json; charset=utf-8",
-                        success: function (arr) {
-                            for (var x in arr) {
-                                $scope.messages.push(arr[x]);
-                            }
-
-                            console.log("Messages sent : ", arr);
-                            $scope.messages.sort(function (a, b) {
-                                return a.messageId - b.messageId
-                            })
-                            console.log("Order : ", $scope.messages);
-                            $scope.$apply();
-
-                        },
-                        error: function (err) {
-                            console.log(err);
-                            return;
-                        }
-                    });
-                },
-                error: function (err) {
-                    console.log(err);
-                    return;
-                }
-            });
-        }, interval);
-    
     $scope.sendChat = function () {
         var data = {
             "fromWho": localStorage.getItem('userid'),
@@ -144,23 +102,26 @@ app.controller('patientCtrl', function ($scope, $http) {
             data["toWho"] = $scope.toWho;
         }
 
-        var url = serverURL() + "/chatSend.php";
+        
 
-
-        $.ajax({
-            url: url,
+        var url5 = serverURL() + "/chatSend.php";
+        
+        httpGet(url5, data);
+        $scope.details = "";
+       /* $.ajax({
+            url: url5,
             type: 'GET',
             data: data,
             dataType: 'json',
             contentType: "application/json; charset=utf-8",
             success: function (arr) {
-               
+                $scope.details = "";
             },
-            error: function () {
+            error: function (err) {
+                console.log(err)
+                $scope.details = "";
             }
-        });
-        $scope.init();
-        $scope.details = "";
+        });*/
         //window.location.href = "homepage.html";
     }
 });
