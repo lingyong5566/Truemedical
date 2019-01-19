@@ -1,10 +1,6 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <!--
-        Customize the content security policy in the meta tag below as needed. Add 'unsafe-inline' to default-src to enable inline JavaScript.
-        For details, see http://go.microsoft.com/fwlink/?LinkID=617521
-    -->
 
     <meta http-equiv="Content-Security-Policy" content="default-src *; style-src 'self' http://* 'unsafe-inline'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'" />
     <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
@@ -23,38 +19,73 @@
     <script type="text/javascript" src="scripts/platformOverrides.js"></script>
     <script type="text/javascript" src="scripts/chat.js"></script>
     <script type="text/javascript" src="scripts/common.js"></script>
-    <title>Quick Enquire</title>
+
+    <title>Chat</title>
 </head>
 <body>
-    <div ng-app="myApp" ng-controller="patientCtrl" data-role="page" id="front-page" ng-init="init()">
-        <table height="640px" width="100%">
-            <thead>
-                <td height="520px">
-                    <table>
-                        <tr ng-repeat="x in messages">
-                            <td>{{x.fromWho}} : {{ x.details }}</td>
-                        </tr>
-                    </table>
-                </td>
-            </thead>
-                <tr ng-show="oUser">
-                    <td>
-                        <input type="text" id="chatBox" data-ng-model="toWho" placeholder="Send to?">
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <input type="text" id="chatBox" data-ng-model="details" placeholder="Chat here">
-                    </td>
-                    <td>
-                        <button type="button" ng-click="sendChat()" >Send</button>
-                    </td>
-                </tr>
-        </table>
-        <div>
+    <div ng-app="myApp" ng-controller="patientCtrl" data-role="page" id="front-page">
+        <div data-role="panel" class="ui-panel-position-left ui-panel-inner" id="mypanel" data-display="overlay">
+            <div class="panel-header" data-position="fixed">NAVIGATE</div>
+            <div class="close-button">
+                <a href="#mypanel" class="ui-btn ui-corner-all ui-btn-right ui-btn-icon-notext ui-icon-delete ui-nodisc-icon ui-alt-icon" data-role="button" data-rel="close">Close Me</a>
+            </div>
 
+            <ul data-role="none" data-inset="false" class="ui-listview">
+                <li><a href="#" id="btnHome">HOME</a></li>
+                <li><a href="#" id="btnYourInfo" onclick="window.location.reload()">PROFILE</a></li>
+                <li><a href="#" id="btnAppt">APPOINTMENTS</a></li>
+                <li><a href="#" id="btnHistory">HISTORY</a></li>
+                <li><a href="#">ABOUT US</a></li>
+                <li><a href="#">FAQ</a></li>
+
+                <li><div class="divider"></div></li>
+
+                <li><a href="#">SETTINGS</a></li>
+                <li><a href="#" id="btnLogout">LOG OUT</a></li>
+            </ul>
+
+            <div class="ui-page-footer-fixed">
+                <h3>MP13 | Copyright 2018 Temasek Polytechnic</h3>
+            </div>
         </div>
 
+        <div data-role="header" class="ui-header" data-position="fixed" id="header" ng-app="myApp" ng-controller="patientCtrl" ng-init="init()">
+            <div class="menu-button">
+                <a href="#mypanel" class="ui-btn ui-corner-all ui-btn-left ui-btn-icon-notext ui-icon-bars ui-nodisc-icon ui-alt-icon ui-noboxshadow" data-role="button" data-rel="open">Menu</a>
+                <h3 style="text-align: center; letter-spacing: 0.5px;">CHAT </h3>
+                <div class="divider"></div>
+            </div>
+
+            <div>
+                <table height="640px" width="100%">
+                    <thead>
+                    <td height="520px">
+                        <table>
+                            <tr ng-repeat="x in messages">
+                                <td>{{x.fromWho}} : {{ x.details }}</td>
+                            </tr>
+                        </table>
+                    </td>
+                    </thead>
+                    <tr ng-show="oUser">
+                        <td>
+                            <input type="text" id="chatBox" data-ng-model="toWho" placeholder="Send to?">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="text" id="chatBox" data-ng-model="details" placeholder="Chat here">
+                        </td>
+                        <td>
+                            <button type="button" ng-click="sendChat()">Send</button>
+                        </td>
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+        
     </div>
 </body>
 </html>
+

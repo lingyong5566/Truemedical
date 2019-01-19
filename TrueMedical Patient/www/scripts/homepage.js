@@ -119,7 +119,40 @@ app.controller('patientCtrl', function ($scope, $http) {
                     return;
                 }
             });
+
+            alert("You have been added into the queue system.");
         }
         //window.location.href = "homepage.html";
+    }
+
+    $scope.btnRemoveQueue = function () {
+        console.log("deleteValue called");
+
+        var userid = localStorage.getItem('userid');
+
+        var data = {
+            "userid": userid
+        };
+
+        var url = serverURL() + "/qrstatusdelete.php";
+
+
+        $.ajax({
+            url: url,
+            type: 'GET',
+            data: data,
+            dataType: 'json',
+            contentType: "application/json; charset=utf-8",
+            success: function (arr) {
+                
+                $scope.init();
+            },
+            error: function () {
+                $scope.init();
+                return;
+            }
+        });
+        alert("You have been removed from the queue system.");
+        $scope.confirmedBooking = "Not confirmed";
     }
 });

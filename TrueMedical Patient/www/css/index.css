@@ -40,4 +40,15 @@
     background-color: #3e8e41;
 }
 
+div.ex1 {
+    width: 100%;
+}
+textarea.ex2 {
+    width: 500px;
+    height: 150px !important;
+}
 
+textarea.ui-body-inherit {
+    width: 100% !important;
+    height: 150px !important;
+}
