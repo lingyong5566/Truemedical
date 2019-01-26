@@ -42,13 +42,58 @@ app.controller('apptCtrl', function ($scope, $http) {
         //Input data into database
         $("#btnRegister1").bind("click", function () {
             console.log($scope.theDate);
+            var conflicted = false;
             if ($("#NewPatientForm").valid()) {
                 console.log(checkDate($scope.theDate))
                 console.log(checkTime($scope.theTime))
-                if (checkDate($scope.theDate)) //&& checkTime($scope.theTime)
-                    sendOTP();
+                if (checkDate($scope.theDate) && checkTime($scope.theTime)) 
+                {
+                    var callback = function (arr) {
+                        console.log("appointments : ", arr);
+                        
+                        
+                        for (var x = 0; x < arr.length; x++) {
+                            console.log("$scope.theDate : ", $scope.theDate);
+                            var toCompareDate = $scope.theDate.getFullYear() + "-" + $scope.theDate.getMonth() + 1 + "-" + $scope.theDate.getDate();
+                            console.log(toCompareDate);
+                            console.log(arr[x].date);
+                            if (toCompareDate == arr[x].date) {
+                                var bookedTime = $("#txtTime").val();        
+                                bookedTime = bookedTime.split(":");
+                                var splitTime = arr[x].time.split(":");
+                                bookedTime = new Date(0, 0, 0, bookedTime[0], bookedTime[1]);
+                                
+                                var conflictTime = new Date(0, 0, 0, splitTime[0], splitTime[1], splitTime[2]);
+                                var addedConflictTime = new Date(0, 0, 0, splitTime[0], splitTime[1], splitTime[2]);
+                                addedConflictTime.setHours(addedConflictTime.getHours() + 1);
+
+                                console.log("conflictTime <= bookedTime : ", conflictTime <= bookedTime)
+                                console.log("bookedTime <= addedConflictTime : ", bookedTime <= addedConflictTime)
+                                console.log(bookedTime)
+                                console.log(conflictTime)
+                                console.log(addedConflictTime)
+                                if (conflictTime <= bookedTime && bookedTime <= addedConflictTime ) {
+                                    alert("Conflicted with another appointment. Please choose another timing or another date");
+                                    conflicted = true;
+                                    return;
+                                }
+                                else {
+
+                                }
+                                //if($scope.theTime >)
+                            }
+                        }
+                        if(!conflicted)
+                            sendOTP();
+
+                    }
+                    doAJAXCall("/getAppointment.php", {} , callback , callback)
+                    
+                    
+                }
+                    
                 else {
-                    alert("Time invalid or date invalid. Please check");
+                    alert("Sorry, our clinic is open from 12pm to 6pm.");
                 }
             }
             else {
@@ -77,6 +122,8 @@ app.controller('apptCtrl', function ($scope, $http) {
             return;
         }
     });
+
+    
 
     var modRes = function () {
         
@@ -121,7 +168,7 @@ app.controller('apptCtrl', function ($scope, $http) {
         var d2 = new Date(time);
         console.log(d2);
         console.log(d2.getHours());
-        if (d2.getHours() > 8 || d2.getHours() < 17 ) {
+        if (d2.getHours() > 11 || d2.getHours() < 18 ) {
             return true;
         }
         else

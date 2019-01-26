@@ -26,6 +26,19 @@ app.controller('patientCtrl', function ($scope, $http) {
         req();
     }
 
+    var limitMessage = function () {
+        //Limit messages 
+        console.log("Limit Messages called");
+        if ($scope.messages.length > 22) {
+            console.log("Limiting begins")
+            var temp = [];
+            for (var x = $scope.messages.length - 1; x > $scope.messages.length - 22; x--) {
+                temp.push($scope.messages[x]);
+            }
+            $scope.messages = temp;
+        }
+    }
+
     var interval = 1000;
 
     var req = function () {
@@ -64,6 +77,9 @@ app.controller('patientCtrl', function ($scope, $http) {
                         $scope.messages.sort(function (a, b) {
                             return a.messageId - b.messageId
                         })
+                        
+                        limitMessage();
+                        
                         console.log("Order : ", $scope.messages);
                         $scope.$apply();
 

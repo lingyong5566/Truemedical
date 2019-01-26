@@ -53,6 +53,7 @@ app.controller('patientCtrl', function ($scope, $http) {
                         if (arr[x].name == userid) {
                             if (arr[x].bookingStatus == 1) {
                                 $scope.confirmedBooking = "Confirmed"
+                                $scope.timing = "Appointment on " + arr[x].date + " at " + arr[x].time  + " is confirmed.";
                             }
                             else {
                                 $scope.confirmedBooking = "Not Confirmed";

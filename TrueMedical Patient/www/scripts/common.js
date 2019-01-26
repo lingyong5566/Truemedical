@@ -11,6 +11,29 @@ function validationMsgs(message, title, button) {
     );
 }
 
+function doAJAXCall(partialLink, dataToSend, callback, callbackFailed) {
+
+    var url = serverURL() + partialLink;
+
+    var data = dataToSend;
+    $.ajax({
+        url: url,
+        type: 'GET',
+        data: data,
+        dataType: 'json',
+        contentType: "application/json; charset=utf-8",
+        success: function (arr) {
+            callback(arr);
+            return "Success";
+        },
+        error: function (arr) {
+            callbackFailed(arr);
+            return "Failed";
+        }
+    });
+
+}
+
 function printnavbar() {
     //binds the buttons on the NavBar
 
