@@ -73,13 +73,13 @@
                     </div>
 
                     <div data-role="fieldcontainer">
-                        <label for="mobileNo">Mobile Number</label>
-                        <input type="text" name="txtMobileNo" id="txtMobileNo" data-ng-model="obj.mobileNo" placeholder="Enter Mobile Number" required>
+                        <label for="DOB">Date of Birth</label>
+                        <input type="date" name="txtDOB" id="txtDOB" placeholder="Enter Date of Birth ( dd/mm/yyyy )" data-ng-model="obj.dob" required>
                     </div>
 
                     <div data-role="fieldcontainer">
-                        <label for="homeAdd">Home Address</label>
-                        <input type="text" name="txtHomeAdd" id="txtHomeAdd" data-ng-model="obj.homeAdd" placeholder="Enter Home Address" value="" required>
+                        <label for="sex">Sex</label>
+                        <input type="text" name="txtSex" id="txtSex" data-ng-model="obj.sex" placeholder="Enter Your Sex">
                     </div>
 
                     <div data-role="fieldcontainer">
@@ -88,8 +88,18 @@
                     </div>
 
                     <div data-role="fieldcontainer">
-                        <label for="sex">Sex</label>
-                        <input type="text" name="txtSex" id="txtSex" data-ng-model="obj.sex" placeholder="Enter Your Sex">
+                        <label for="nationality">Nationality</label>
+                        <input type="text" name="txtNationality" id="txtNationality" data-ng-model="obj.nationality" placeholder="Enter Your Nationality">
+                    </div>
+
+                    <div data-role="fieldcontainer">
+                        <label for="mobileNo">Mobile Number</label>
+                        <input type="text" name="txtMobileNo" id="txtMobileNo" data-ng-model="obj.mobileNo" placeholder="Enter Mobile Number" required>
+                    </div>
+
+                    <div data-role="fieldcontainer">
+                        <label for="homeAdd">Home Address</label>
+                        <input type="text" name="txtHomeAdd" id="txtHomeAdd" data-ng-model="obj.homeAdd" placeholder="Enter Home Address" value="" required>
                     </div>
 
                     <div data-role="fieldcontainer">
@@ -103,15 +113,9 @@
                     </div>
 
 
-                    <div data-role="fieldcontainer">
-                        <label for="nationality">Nationality</label>
-                        <input type="text" name="txtNationality" id="txtNationality" data-ng-model="obj.nationality" placeholder="Enter Your Nationality">
-                    </div>
 
-                    <div data-role="fieldcontainer">
-                        <label for="DOB">Date of Birth</label>
-                        <input type="date" name="txtDOB" id="txtDOB" placeholder="Enter Date of Birth ( dd/mm/yyyy )" data-ng-model="obj.dob" required>
-                    </div>
+
+
 
                     <div class="entry-button">
                         <button ng-click="btnRegister()" class="ui-btn ui-btn-a ui-corner-all" id="btnRegister" style="letter-spacing: 2px;">REGISTER</button>
