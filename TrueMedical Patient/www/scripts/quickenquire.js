@@ -22,12 +22,10 @@ app.controller('patientCtrl', function ($scope, $http) {
                 contentType: "application/json; charset=utf-8",
                 success: function (arr) {
                     alert("Your query is sent");
-                    window.location.href = "homepage.html";
                     return;
                 },
                 error: function (arr) {
                     alert("Your query is sent");
-                    window.location.href = "homepage.html";
                     return;
                 }
             });
