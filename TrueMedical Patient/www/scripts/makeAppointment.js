@@ -168,7 +168,7 @@ app.controller('apptCtrl', function ($scope, $http) {
         var d2 = new Date(time);
         console.log(d2);
         console.log(d2.getHours());
-        if (d2.getHours() > 11 || d2.getHours() < 18 ) {
+        if ((d2.getHours() > 7 && d2.getHours() < 14) || (d2.getHours() > 17 && d2.getHours() < 23)) {
             return true;
         }
         else
