@@ -39,7 +39,7 @@ app.controller('patientCtrl', function ($scope, $http) {
         }
 
         if (checkCorrectness()) {
-            $.ajax({
+            /*$.ajax({
                 url: url,
                 type: 'GET',
                 data: data,
@@ -52,8 +52,16 @@ app.controller('patientCtrl', function ($scope, $http) {
                     alert("Your query is sent");
                 }
             });
+            */
+            httpGet(url, data);
+            alert("Query sent!");
         }
-        
+        function httpGet(theUrl, data) {
+            var xmlHttp = new XMLHttpRequest();
+            xmlHttp.open("GET", theUrl + "?name=" + data.name + "&email=" + data.email + "&phoneNo=" + data.phoneNo + "&enquiry=" + data.enquiry, false); // false for synchronous request
+            xmlHttp.send(null);
+            return xmlHttp.responseText;
+        }
 
        
         
