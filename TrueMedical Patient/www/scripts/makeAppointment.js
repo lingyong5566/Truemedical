@@ -44,7 +44,7 @@ app.controller('apptCtrl', function ($scope, $http) {
             console.log($scope.theDate);
             var conflicted = false;
             if ($("#NewPatientForm").valid()) {
-                console.log(checkDate($scope.theDate))
+                console.log("checkDate($scope.theDate) : " , checkDate($scope.theDate))
                 console.log(checkTime($scope.theTime))
                 if (checkDate($scope.theDate) && checkTime($scope.theTime)) 
                 {
@@ -154,10 +154,11 @@ app.controller('apptCtrl', function ($scope, $http) {
     var checkDate = function (date) {
         var d1 = new Date();
         var d2 = new Date(date);
-        console.log(d1.getDate() + 1)
-        console.log(d2.getDate())
-        console.log(d1.getDate() + 1 <= d2.getDate())
-        if (d1.getDate() + 1 <= d2.getDate()) {
+        d1.setDate(d1.getDate() + 1);
+        console.log(d1.getDate())
+        console.log(" d2.getDate() :  " , d2.getDate())
+        console.log(d1.getDate()<= d2.getDate())
+        if (d1.getDate()<= d2.getDate()) {
             return true;
         }
         else
@@ -168,6 +169,9 @@ app.controller('apptCtrl', function ($scope, $http) {
         var d2 = new Date(time);
         console.log(d2);
         console.log(d2.getHours());
+        console.log("(d2.getHours() > 7 && d2.getHours() < 14) : ", (d2.getHours() > 7 && d2.getHours() < 14))
+        console.log("(d2.getHours() > 17 && d2.getHours() < 23)", (d2.getHours() > 17 && d2.getHours() < 23))
+        console.log("(d2.getHours() > 7 && d2.getHours() < 14) || (d2.getHours() > 17 && d2.getHours() < 23) : ", (d2.getHours() > 7 && d2.getHours() < 14) || (d2.getHours() > 17 && d2.getHours() < 23))
         if ((d2.getHours() > 7 && d2.getHours() < 14) || (d2.getHours() > 17 && d2.getHours() < 23)) {
             return true;
         }
